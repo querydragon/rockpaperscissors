@@ -1,15 +1,32 @@
 import random
 
-# 1부터 45까지의 숫자 리스트 생성
-numbers = list(range(1, 46))
 
-# 6개의 숫자 무작위로 선택하여 결과 리스트에 저장
-lotto_numbers = random.sample(numbers, 6)
+def game(player_choice):
+    choices = ['가위', '바위', '보']
+    computer_choice = random.choice(choices)
 
-# 오름차순으로 정렬
-lotto_numbers.sort()
+    print(f"플레이어: {player_choice}")
+    print(f"컴퓨터: {computer_choice}")
 
-# 결과 출력
-print("로또 번호: ", end='')
-for number in lotto_numbers:
-    print(number, end=' ')
+    if player_choice == computer_choice:
+        print("비겼습니다!")
+    elif (player_choice == "가위" and computer_choice == "보") or \
+            (player_choice == "바위" and computer_choice == "가위") or \
+            (player_choice == "보" and computer_choice == "바위"):
+        print("플레이어가 이겼습니다!")
+    else:
+        print("컴퓨터가 이겼습니다!")
+
+
+while True:
+    user_input = input("가위, 바위, 보 중 하나를 선택하세요 (종료하려면 '끝'을 입력하세요): ")
+
+    if user_input == '끝':
+        print("게임을 종료합니다.")
+        break
+
+    if user_input not in ['가위', '바위', '보']:
+        print("가위, 바위, 보 중에서 선택해주세요.")
+        continue
+
+    game(user_input)
